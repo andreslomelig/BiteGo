@@ -1,0 +1,1 @@
+export const API_URL = 'Repalce with your API URL here (if hosted by youself example: http://ip.xxx.xx.x:3000)'; 

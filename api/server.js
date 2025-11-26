@@ -5,227 +5,220 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// --- Data ---
+// --- CATEGORÍAS DELIVERY / COMIDA ---
 const categories = [
   {
-    id: 'hamburguesas',
-    name: 'Hamburguesas',
-    image: 'https://via.placeholder.com/150x150.png?text=Hamburguesas'
+    id: 'hamburgers',
+    name: 'Burgers',
+    image: 'https://source.unsplash.com/800x600/?burger,fastfood'
   },
   {
     id: 'pizza',
     name: 'Pizza',
-    image: 'https://via.placeholder.com/150x150.png?text=Pizza'
+    image: 'https://source.unsplash.com/800x600/?pizza'
   },
   {
     id: 'sushi',
     name: 'Sushi',
-    image: 'https://via.placeholder.com/150x150.png?text=Sushi'
+    image: 'https://source.unsplash.com/800x600/?sushi'
   },
   {
-    id: 'postres',
-    name: 'Postres',
-    image: 'https://via.placeholder.com/150x150.png?text=Postres'
+    id: 'desserts',
+    name: 'Desserts',
+    image: 'https://source.unsplash.com/800x600/?dessert,cake'
   },
   {
-    id: 'ensaladas',
-    name: 'Ensaladas',
-    image: 'https://via.placeholder.com/150x150.png?text=Ensaladas'
+    id: 'salads',
+    name: 'Salads',
+    image: 'https://source.unsplash.com/800x600/?salad,healthy'
   },
   {
-    id: 'cafe',
-    name: 'Café y Bebidas',
-    image: 'https://via.placeholder.com/150x150.png?text=Cafe'
+    id: 'coffee',
+    name: 'Coffee & Drinks',
+    image: 'https://source.unsplash.com/800x600/?coffee,latte'
   },
 ];
 
-// --- Products ---
+// --- PRODUCTOS ---
 const products = [
-  // HAMBURGUESAS
+  // BURGERS
   {
     id: '1',
-    categoryId: 'hamburguesas',
-    name: 'Hamburguesa Clásica',
-    price: 99.00,
-    description: 'Carne 100% res, queso americano, lechuga, jitomate y aderezo de la casa.',
-    image: 'https://via.placeholder.com/300x200.png?text=Hamburguesa+Clasica'
+    categoryId: 'hamburgers',
+    name: 'Classic Cheeseburger',
+    price: 99.0,
+    description: 'Beef patty, cheddar cheese, lettuce, tomato and house sauce.',
+    image: 'https://source.unsplash.com/800x600/?cheeseburger'
   },
   {
     id: '2',
-    categoryId: 'hamburguesas',
-    name: 'Hamburguesa Doble Queso',
-    price: 129.00,
-    description: 'Doble carne, doble queso, pan brioche y pepinillos.',
-    image: 'https://via.placeholder.com/300x200.png?text=Hamburguesa+Doble+Queso'
+    categoryId: 'hamburgers',
+    name: 'BBQ Bacon Burger',
+    price: 129.0,
+    description: 'Grilled beef, crispy bacon, BBQ sauce and caramelized onions.',
+    image: 'https://source.unsplash.com/800x600/?burger,bacon'
   },
   {
     id: '3',
-    categoryId: 'hamburguesas',
-    name: 'Hamburguesa BBQ',
-    price: 139.00,
-    description: 'Carne a la parrilla con salsa BBQ, cebolla caramelizada y tocino.',
-    image: 'https://via.placeholder.com/300x200.png?text=Hamburguesa+BBQ'
+    categoryId: 'hamburgers',
+    name: 'Double Beef Burger',
+    price: 139.0,
+    description: 'Double beef patty, double cheese and brioche bun.',
+    image: 'https://source.unsplash.com/800x600/?double+burger'
   },
 
   // PIZZA
   {
     id: '4',
     categoryId: 'pizza',
-    name: 'Pizza Pepperoni',
-    price: 159.00,
-    description: 'Masa delgada, salsa de jitomate, queso mozzarella y pepperoni.',
-    image: 'https://via.placeholder.com/300x200.png?text=Pizza+Pepperoni'
+    name: 'Pepperoni Pizza',
+    price: 159.0,
+    description: 'Thin crust, tomato sauce, mozzarella and pepperoni.',
+    image: 'https://source.unsplash.com/800x600/?pepperoni+pizza'
   },
   {
     id: '5',
     categoryId: 'pizza',
-    name: 'Pizza Hawaiana',
-    price: 169.00,
-    description: 'Jamón, piña, queso mozzarella y salsa de jitomate.',
-    image: 'https://via.placeholder.com/300x200.png?text=Pizza+Hawaiana'
+    name: 'Margherita Pizza',
+    price: 149.0,
+    description: 'Tomato, mozzarella, basil and extra virgin olive oil.',
+    image: 'https://source.unsplash.com/800x600/?margherita+pizza'
   },
   {
     id: '6',
     categoryId: 'pizza',
-    name: 'Pizza Vegetariana',
-    price: 149.00,
-    description: 'Champiñones, pimiento, cebolla, aceitunas y queso.',
-    image: 'https://via.placeholder.com/300x200.png?text=Pizza+Vegetariana'
+    name: 'Veggie Pizza',
+    price: 169.0,
+    description: 'Mushrooms, peppers, onions, olives and mozzarella.',
+    image: 'https://source.unsplash.com/800x600/?vegetarian+pizza'
   },
 
   // SUSHI
   {
     id: '7',
     categoryId: 'sushi',
-    name: 'Roll California',
-    price: 119.00,
-    description: 'Arroz, surimi, pepino, aguacate y ajonjolí.',
-    image: 'https://via.placeholder.com/300x200.png?text=Roll+California'
+    name: 'California Roll',
+    price: 119.0,
+    description: 'Rice, surimi, cucumber, avocado and sesame seeds.',
+    image: 'https://source.unsplash.com/800x600/?california+roll'
   },
   {
     id: '8',
     categoryId: 'sushi',
-    name: 'Roll Philadelphia',
-    price: 129.00,
-    description: 'Salmón, queso crema y aguacate.',
-    image: 'https://via.placeholder.com/300x200.png?text=Roll+Philadelphia'
+    name: 'Salmon Nigiri Set',
+    price: 139.0,
+    description: 'Fresh salmon nigiri served with soy sauce and wasabi.',
+    image: 'https://source.unsplash.com/800x600/?salmon+sushi'
   },
   {
     id: '9',
     categoryId: 'sushi',
-    name: 'Roll Tempura',
-    price: 139.00,
-    description: 'Roll empanizado, relleno de camarón y queso crema.',
-    image: 'https://via.placeholder.com/300x200.png?text=Roll+Tempura'
+    name: 'Tempura Roll',
+    price: 139.0,
+    description: 'Crispy tempura roll with shrimp and cream cheese.',
+    image: 'https://source.unsplash.com/800x600/?tempura+sushi'
   },
 
-  // POSTRES
+  // DESSERTS
   {
     id: '10',
-    categoryId: 'postres',
-    name: 'Cheesecake de Fresa',
-    price: 79.00,
-    description: 'Rebanada de cheesecake con coulis de fresa.',
-    image: 'https://via.placeholder.com/300x200.png?text=Cheesecake'
+    categoryId: 'desserts',
+    name: 'Strawberry Cheesecake',
+    price: 79.0,
+    description: 'Creamy cheesecake with strawberry topping.',
+    image: 'https://source.unsplash.com/800x600/?cheesecake,dessert'
   },
   {
     id: '11',
-    categoryId: 'postres',
-    name: 'Brownie con Helado',
-    price: 89.00,
-    description: 'Brownie de chocolate caliente con helado de vainilla.',
-    image: 'https://via.placeholder.com/300x200.png?text=Brownie+Helado'
+    categoryId: 'desserts',
+    name: 'Chocolate Brownie',
+    price: 69.0,
+    description: 'Warm chocolate brownie with vanilla ice cream.',
+    image: 'https://source.unsplash.com/800x600/?chocolate+brownie'
   },
   {
     id: '12',
-    categoryId: 'postres',
-    name: 'Pay de Limón',
-    price: 69.00,
-    description: 'Pay casero de limón con base de galleta.',
-    image: 'https://via.placeholder.com/300x200.png?text=Pay+de+Limon'
+    categoryId: 'desserts',
+    name: 'Lemon Pie',
+    price: 69.0,
+    description: 'Homemade lemon pie with biscuit base.',
+    image: 'https://source.unsplash.com/800x600/?lemon+pie'
   },
 
-  // ENSALADAS
+  // SALADS
   {
     id: '13',
-    categoryId: 'ensaladas',
-    name: 'Ensalada César',
-    price: 89.00,
-    description: 'Lechuga romana, crutones, parmesano y aderezo César.',
-    image: 'https://via.placeholder.com/300x200.png?text=Ensalada+Caesar'
+    categoryId: 'salads',
+    name: 'Caesar Salad',
+    price: 89.0,
+    description: 'Romaine lettuce, croutons, parmesan and Caesar dressing.',
+    image: 'https://source.unsplash.com/800x600/?caesar+salad'
   },
   {
     id: '14',
-    categoryId: 'ensaladas',
-    name: 'Ensalada Mediterránea',
-    price: 99.00,
-    description: 'Jitomate, pepino, aceitunas, queso feta y aceite de oliva.',
-    image: 'https://via.placeholder.com/300x200.png?text=Ensalada+Mediterranea'
+    categoryId: 'salads',
+    name: 'Mediterranean Salad',
+    price: 99.0,
+    description: 'Tomato, cucumber, olives, feta cheese and olive oil.',
+    image: 'https://source.unsplash.com/800x600/?mediterranean+salad'
   },
   {
     id: '15',
-    categoryId: 'ensaladas',
-    name: 'Ensalada de Pollo',
-    price: 109.00,
-    description: 'Mezcla de hojas verdes con pollo a la plancha.',
-    image: 'https://via.placeholder.com/300x200.png?text=Ensalada+Pollo'
+    categoryId: 'salads',
+    name: 'Chicken Salad',
+    price: 109.0,
+    description: 'Mixed greens with grilled chicken breast.',
+    image: 'https://source.unsplash.com/800x600/?chicken+salad'
   },
 
-  // CAFÉ Y BEBIDAS
+  // COFFEE & DRINKS
   {
     id: '16',
-    categoryId: 'cafe',
-    name: 'Latte Caliente',
-    price: 55.00,
-    description: 'Café espresso con leche vaporizada.',
-    image: 'https://via.placeholder.com/300x200.png?text=Latte'
+    categoryId: 'coffee',
+    name: 'Hot Latte',
+    price: 55.0,
+    description: 'Espresso with steamed milk and light foam.',
+    image: 'https://source.unsplash.com/800x600/?latte,coffee'
   },
   {
     id: '17',
-    categoryId: 'cafe',
-    name: 'Frappé de Caramelo',
-    price: 69.00,
-    description: 'Bebida fría de café con caramelo y crema batida.',
-    image: 'https://via.placeholder.com/300x200.png?text=Frappe+Caramelo'
+    categoryId: 'coffee',
+    name: 'Iced Caramel Frappe',
+    price: 69.0,
+    description: 'Cold blended coffee with caramel and whipped cream.',
+    image: 'https://source.unsplash.com/800x600/?caramel+frappe'
   },
   {
     id: '18',
-    categoryId: 'cafe',
-    name: 'Té Chai Latte',
-    price: 59.00,
-    description: 'Té chai especiado con leche.',
-    image: 'https://via.placeholder.com/300x200.png?text=Chai+Latte'
+    categoryId: 'coffee',
+    name: 'Chai Latte',
+    price: 59.0,
+    description: 'Spiced chai tea with milk.',
+    image: 'https://source.unsplash.com/800x600/?chai+latte'
   },
 ];
 
-// --- Rutas de la API ---
-
-// Todas las categorías
+// --- Rutas ---
 app.get('/categories', (req, res) => {
   res.json(categories);
 });
 
-// Productos (puedes filtrar por categoría con ?categoryId=hamburguesas, etc.)
 app.get('/products', (req, res) => {
   const { categoryId } = req.query;
   let result = products;
-
   if (categoryId) {
     result = products.filter((p) => p.categoryId === categoryId);
   }
-
   res.json(result);
 });
 
-// Productos por categoría (otra forma: /categories/hamburguesas/products)
 app.get('/categories/:id/products', (req, res) => {
   const { id } = req.params;
   const result = products.filter((p) => p.categoryId === id);
   res.json(result);
 });
 
-// Iniciar servidor
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`API escuchando en http://localhost:${PORT}`);
+  console.log(`API listening on http://localhost:${PORT}`);
 });
