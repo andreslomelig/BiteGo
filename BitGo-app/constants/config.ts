@@ -1,1 +1,6 @@
-export const API_URL = 'Repalce with your API URL here (if hosted by youself example: http://ip.xxx.xx.x:3000)'; 
+import { Platform } from 'react-native';
+
+const localhost = Platform.OS === 'android' ? '10.0.2.2' : 'localhost';
+
+export const API_URL = `https://bitego-api.onrender.com`;
+ 
