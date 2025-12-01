@@ -218,7 +218,7 @@ app.get('/categories/:id/products', (req, res) => {
   res.json(result);
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`API listening on http://localhost:${PORT}`);
+  console.log(`API listening on port ${PORT}`);
 });
