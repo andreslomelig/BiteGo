@@ -63,7 +63,7 @@ npm install
 
 ### 3.2. Run the API (If needed)
 
-The api is currently hosted, so you can skip this unless you whant to host it locally
+The api is currently hosted, so you can skip this unless you want to host it locally
 
 ```bash
 npm run dev
