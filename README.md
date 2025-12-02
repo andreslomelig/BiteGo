@@ -59,53 +59,11 @@ The backend provides:
 cd api
 npm install
 ```
-
-## 3.1. Important: Images Are **Not** Included Yet
-
-The `/public/images` folder is **empty by default**.
-
-**You must add your own images manually.**  
-There are two ways to add them:
-
-### Option 1: Download real images (recommended)
-Search for food images online and download them (for example):
-
-- Google Images
-- Unsplash
-- Pexels
-- Freepik
-- Pixabay
-
-Then place them inside:
-
-```
-api/public/images/
-```
-
-Use simple filenames such as:
-
-```
-burger.jpg
-pizza.jpg
-sushi.jpg
-dessert.jpg
-coffee.jpg
-salad.jpg
-```
-
-### Option 2: Use direct image URLs
-Instead of downloading files, you can use direct URLs in the API:
-
-```js
-image: "https://example.com/my-image.jpg"
-```
-
-But you must ensure the links work.  
-Many free-hosted images block external access, so downloading the files is **more reliable**.
-
 ---
 
-### 3.3. Run the API
+### 3.2. Run the API (If needed)
+
+The api is currently hosted, so you can skip this unless you whant to host it locally
 
 ```bash
 npm run dev
@@ -119,7 +77,7 @@ Default URL:
 http://localhost:3000
 ```
 
-### 3.4. API Endpoints
+### 3.3. API Endpoints
 
 | Method | Endpoint                     | Description |
 |--------|------------------------------|-------------|
@@ -225,33 +183,7 @@ npx expo start
 
 ---
 
-## 5. Deployment – Hosting the API (future)
-
-Later the `api/` folder can be deployed to services like:
-
-- Render
-- Railway
-- Fly.io
-- DigitalOcean
-- AWS / Azure / GCP
-
-Once hosted, you will have a URL like:
-
-```
-https://bitgo-foodapi.onrender.com
-```
-
-Then simply update:
-
-```ts
-export const API_URL = "https://bitgo-foodapi.onrender.com";
-```
-
-The mobile app will now work **from anywhere in the world**.
-
----
-
-## 6. Quick Summary
+## 5. Quick Summary
 
 - Run `api/` → serves categories, products, and images.
 - Run `BitGo-app/` → mobile UI using Expo Router.
