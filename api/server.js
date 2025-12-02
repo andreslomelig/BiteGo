@@ -203,7 +203,10 @@ const products = [
 ];
 
 // Helper para construir URL completa
-const getFullUrl = (req, path) => `${req.protocol}://${req.get('host')}/${path}`;
+const getFullUrl = (req, path) => {
+  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+  return `${protocol}://${req.get('host')}/${path}`;
+};
 
 // --- Rutas ---
 app.get('/categories', (req, res) => {
