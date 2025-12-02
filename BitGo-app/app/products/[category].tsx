@@ -60,20 +60,46 @@ export default function ProductsScreen() {
     setTimeout(() => setToastVisible(false), 2500);
   };
 
-  const fetchProducts = () => {
+  const fetchProducts = async () => {
     setLoading(true);
     setError(null);
-    fetch(`${API_URL}/products?categoryId=${category}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch products");
-        return res.json();
-      })
-      .then((data) => setProducts(data))
-      .catch((err) => {
-        console.error("Error fetching products:", err);
-        setError("Failed to load products. Please check your connection.");
-      })
-      .finally(() => setLoading(false));
+    try {
+      // Ensure category is a string
+      const categoryStr = Array.isArray(category) ? category[0] : category;
+      if (!categoryStr) throw new Error("Invalid category");
+
+      const url = `${API_URL}/products?categoryId=${categoryStr}`;
+      console.log("Fetching URL:", url);
+      
+      // Test connectivity first
+      try {
+        await fetch('https://www.google.com', { method: 'HEAD' });
+        console.log("Internet connectivity check passed");
+      } catch (e) {
+        console.warn("Internet connectivity check failed:", e);
+      }
+
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      });
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
+      const data = await res.json();
+      console.log("Products received:", data.length);
+      setProducts(data);
+    } catch (err) {
+      console.error("Error fetching products:", err);
+      setError(`Failed to load products: ${err instanceof Error ? err.message : String(err)}`);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
