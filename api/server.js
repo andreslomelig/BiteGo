@@ -1,41 +1,45 @@
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Servir archivos estáticos desde la carpeta public
+app.use(express.static(path.join(__dirname, 'public')));
 
 // --- CATEGORÍAS DELIVERY / COMIDA ---
 const categories = [
   {
     id: 'hamburgers',
     name: 'Burgers',
-    image: 'https://source.unsplash.com/800x600/?burger,fastfood'
+    image: 'images/PortadaBurguer.jpg'
   },
   {
     id: 'pizza',
     name: 'Pizza',
-    image: 'https://source.unsplash.com/800x600/?pizza'
+    image: 'images/PortadaPizza.jpg'
   },
   {
     id: 'sushi',
     name: 'Sushi',
-    image: 'https://source.unsplash.com/800x600/?sushi'
+    image: 'images/PortadaSushi.jpeg'
   },
   {
     id: 'desserts',
     name: 'Desserts',
-    image: 'https://source.unsplash.com/800x600/?dessert,cake'
+    image: 'images/PortadaDessert.jpg'
   },
   {
     id: 'salads',
     name: 'Salads',
-    image: 'https://source.unsplash.com/800x600/?salad,healthy'
+    image: 'images/Salads.jpg'
   },
   {
     id: 'coffee',
     name: 'Coffee & Drinks',
-    image: 'https://source.unsplash.com/800x600/?coffee,latte'
+    image: 'images/PortadaCoffee.jpeg'
   },
 ];
 
@@ -48,7 +52,7 @@ const products = [
     name: 'Classic Cheeseburger',
     price: 99.0,
     description: 'Beef patty, cheddar cheese, lettuce, tomato and house sauce.',
-    image: 'https://source.unsplash.com/800x600/?cheeseburger'
+    image: 'images/CheesBurguer.jpeg'
   },
   {
     id: '2',
@@ -56,7 +60,7 @@ const products = [
     name: 'BBQ Bacon Burger',
     price: 129.0,
     description: 'Grilled beef, crispy bacon, BBQ sauce and caramelized onions.',
-    image: 'https://source.unsplash.com/800x600/?burger,bacon'
+    image: 'images/BaconBurguer.jpeg'
   },
   {
     id: '3',
@@ -64,7 +68,7 @@ const products = [
     name: 'Double Beef Burger',
     price: 139.0,
     description: 'Double beef patty, double cheese and brioche bun.',
-    image: 'https://source.unsplash.com/800x600/?double+burger'
+    image: 'images/DoubleBeefBurguer.webp'
   },
 
   // PIZZA
@@ -74,7 +78,7 @@ const products = [
     name: 'Pepperoni Pizza',
     price: 159.0,
     description: 'Thin crust, tomato sauce, mozzarella and pepperoni.',
-    image: 'https://source.unsplash.com/800x600/?pepperoni+pizza'
+    image: 'images/peperoniPizza.webp'
   },
   {
     id: '5',
@@ -82,7 +86,7 @@ const products = [
     name: 'Margherita Pizza',
     price: 149.0,
     description: 'Tomato, mozzarella, basil and extra virgin olive oil.',
-    image: 'https://source.unsplash.com/800x600/?margherita+pizza'
+    image: 'images/MargueritaPizza.avif'
   },
   {
     id: '6',
@@ -90,7 +94,7 @@ const products = [
     name: 'Veggie Pizza',
     price: 169.0,
     description: 'Mushrooms, peppers, onions, olives and mozzarella.',
-    image: 'https://source.unsplash.com/800x600/?vegetarian+pizza'
+    image: 'images/VeggiePizza.avif'
   },
 
   // SUSHI
@@ -100,7 +104,7 @@ const products = [
     name: 'California Roll',
     price: 119.0,
     description: 'Rice, surimi, cucumber, avocado and sesame seeds.',
-    image: 'https://source.unsplash.com/800x600/?california+roll'
+    image: 'images/CaliforniaRoll.jpg'
   },
   {
     id: '8',
@@ -108,7 +112,7 @@ const products = [
     name: 'Salmon Nigiri Set',
     price: 139.0,
     description: 'Fresh salmon nigiri served with soy sauce and wasabi.',
-    image: 'https://source.unsplash.com/800x600/?salmon+sushi'
+    image: 'images/SalmonNigiri.jpeg'
   },
   {
     id: '9',
@@ -116,7 +120,7 @@ const products = [
     name: 'Tempura Roll',
     price: 139.0,
     description: 'Crispy tempura roll with shrimp and cream cheese.',
-    image: 'https://source.unsplash.com/800x600/?tempura+sushi'
+    image: 'images/TempuraRoll.webp'
   },
 
   // DESSERTS
@@ -126,7 +130,7 @@ const products = [
     name: 'Strawberry Cheesecake',
     price: 79.0,
     description: 'Creamy cheesecake with strawberry topping.',
-    image: 'https://source.unsplash.com/800x600/?cheesecake,dessert'
+    image: 'images/StrawberryCheescake.jpg'
   },
   {
     id: '11',
@@ -134,7 +138,7 @@ const products = [
     name: 'Chocolate Brownie',
     price: 69.0,
     description: 'Warm chocolate brownie with vanilla ice cream.',
-    image: 'https://source.unsplash.com/800x600/?chocolate+brownie'
+    image: 'images/Brownie.jpeg'
   },
   {
     id: '12',
@@ -142,7 +146,7 @@ const products = [
     name: 'Lemon Pie',
     price: 69.0,
     description: 'Homemade lemon pie with biscuit base.',
-    image: 'https://source.unsplash.com/800x600/?lemon+pie'
+    image: 'images/LemonPie.jpg'
   },
 
   // SALADS
@@ -152,7 +156,7 @@ const products = [
     name: 'Caesar Salad',
     price: 89.0,
     description: 'Romaine lettuce, croutons, parmesan and Caesar dressing.',
-    image: 'https://source.unsplash.com/800x600/?caesar+salad'
+    image: 'images/CesarSalad.jpg'
   },
   {
     id: '14',
@@ -160,7 +164,7 @@ const products = [
     name: 'Mediterranean Salad',
     price: 99.0,
     description: 'Tomato, cucumber, olives, feta cheese and olive oil.',
-    image: 'https://source.unsplash.com/800x600/?mediterranean+salad'
+    image: 'images/MediterreanSalad.jpg'
   },
   {
     id: '15',
@@ -168,7 +172,7 @@ const products = [
     name: 'Chicken Salad',
     price: 109.0,
     description: 'Mixed greens with grilled chicken breast.',
-    image: 'https://source.unsplash.com/800x600/?chicken+salad'
+    image: 'images/ChickenSalad.jpg'
   },
 
   // COFFEE & DRINKS
@@ -178,7 +182,7 @@ const products = [
     name: 'Hot Latte',
     price: 55.0,
     description: 'Espresso with steamed milk and light foam.',
-    image: 'https://source.unsplash.com/800x600/?latte,coffee'
+    image: 'images/HotLatte.jpeg'
   },
   {
     id: '17',
@@ -186,7 +190,7 @@ const products = [
     name: 'Iced Caramel Frappe',
     price: 69.0,
     description: 'Cold blended coffee with caramel and whipped cream.',
-    image: 'https://source.unsplash.com/800x600/?caramel+frappe'
+    image: 'images/CaramelMacchiato.jpeg'
   },
   {
     id: '18',
@@ -194,13 +198,20 @@ const products = [
     name: 'Chai Latte',
     price: 59.0,
     description: 'Spiced chai tea with milk.',
-    image: 'https://source.unsplash.com/800x600/?chai+latte'
+    image: 'images/ChaiLatte.webp'
   },
 ];
 
+// Helper para construir URL completa
+const getFullUrl = (req, path) => `${req.protocol}://${req.get('host')}/${path}`;
+
 // --- Rutas ---
 app.get('/categories', (req, res) => {
-  res.json(categories);
+  const result = categories.map(c => ({
+    ...c,
+    image: getFullUrl(req, c.image)
+  }));
+  res.json(result);
 });
 
 app.get('/products', (req, res) => {
@@ -209,12 +220,22 @@ app.get('/products', (req, res) => {
   if (categoryId) {
     result = products.filter((p) => p.categoryId === categoryId);
   }
+  // Mapear imágenes
+  result = result.map(p => ({
+    ...p,
+    image: getFullUrl(req, p.image)
+  }));
   res.json(result);
 });
 
 app.get('/categories/:id/products', (req, res) => {
   const { id } = req.params;
-  const result = products.filter((p) => p.categoryId === id);
+  let result = products.filter((p) => p.categoryId === id);
+  // Mapear imágenes
+  result = result.map(p => ({
+    ...p,
+    image: getFullUrl(req, p.image)
+  }));
   res.json(result);
 });
 
