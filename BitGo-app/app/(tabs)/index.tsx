@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Link } from "expo-router";
 import {
   View,
@@ -55,6 +56,7 @@ export default function CategoriesScreen() {
     );
 
   return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: Palette.background }}>
     <View style={styles.container}>
       <Text style={styles.title}>Select a Category</Text>
 
@@ -78,6 +80,7 @@ export default function CategoriesScreen() {
         contentContainerStyle={{ paddingBottom: 20 }}
       />
     </View>
+    </SafeAreaView>
   );
 }
 
